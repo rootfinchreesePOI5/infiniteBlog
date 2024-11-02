@@ -8,8 +8,8 @@ const AllChoice = () => {
         <Section_Title title_text="All Choices"  Details=" A blend of expert insights, personal stories, and detailed reviews"/>
       <div className="allchoice-container">
         {
-         AllChoices.map((item) =>{
-            return <div className='Choice-item'>
+         AllChoices.map((item , index) =>{
+            return <div className='Choice-item' key={index}>
                 <div className="Choice" style={{backgroundImage : `url(${item.img})`}}>
                     <Link to={`${item.path}`}><h1>{item.key}</h1></Link>
                 </div>

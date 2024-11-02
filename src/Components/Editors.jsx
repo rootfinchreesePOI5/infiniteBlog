@@ -11,8 +11,8 @@ const Editors = () => {
       <div className="editors-container">
         <div className="editor-items">
           {
-            editors_first.map((item) =>{
-              return <div className='Editor_group'>
+            editors_first.map((item , index) =>{
+              return <div className='Editor_group' key={index}>
                 <div className='Editors_part1' style={{backgroundImage: `url(${item.img})`}}>
                 <Link to={`${item.path}`}><h1>{item.key}</h1></Link>
                 </div>
@@ -26,8 +26,8 @@ const Editors = () => {
         </div>
         <div className="editor-items">
           {
-            Editors_choice.map((item) =>{
-              return <div className='Editor_group' >
+            Editors_choice.map((item , index) =>{
+              return <div className='Editor_group' key={index} >
                 <div className='Editor_part2' style={{backgroundImage: `url(${item.img})`}}>
                 <Link to={`${item.path}`}><h1>{item.key}</h1></Link>
                 </div>

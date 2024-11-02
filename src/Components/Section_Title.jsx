@@ -9,4 +9,4 @@ const Section_Title = ({title_text , Details}) => {
   )
 }
 
-export default Section_Title
+export default Section_Title;

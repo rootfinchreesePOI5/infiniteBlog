@@ -21,28 +21,28 @@ export const Recent = [
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Lifestyle Insights for 2023",
         key: "Lifestyle",
-        path: "lifestyle"
+        path: "/categories/lifestyle"
     },
     {
         img: Business,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Business Strategies for Sustainable Growth",
         key: "Business",
-        path: "business"
+        path: "/categories/economy"
     },
     {
         img: Technology_2,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Advancements in Technology",
         key: "Technology",
-        path: "technology"
+        path: "/categories/technology"
     }
 ];
 
 export const Trendy = [
-    { img: Technology, Read: `6min Read__ ${new Date().toLocaleDateString()}`, Title: "Technology's Impact on Business", key: "Technology", path: "technology" },
-    { img: Food, Read: `6min Read__ ${new Date().toLocaleDateString()}`, Title: "Future of Food and Sustainable Eating", key: "Food", path: "food" },
-    { img: Fashion, Read: `6min Read__ ${new Date().toLocaleDateString()}`, Title: "Fashion Trends in 2023", key: "Fashion", path: "fashion" }
+    { img: Technology, Read: `6min Read__ ${new Date().toLocaleDateString()}`, Title: "Technology's Impact on Business", key: "Technology", path: "/categories/technology" },
+    { img: Food, Read: `6min Read__ ${new Date().toLocaleDateString()}`, Title: "Future of Food and Sustainable Eating", key: "Food", path: "/categories/food" },
+    { img: Fashion, Read: `6min Read__ ${new Date().toLocaleDateString()}`, Title: "Fashion Trends in 2023", key: "Fashion", path: "/categories/fashion" }
 ];
 
 export const Editors_choice = [
@@ -51,14 +51,14 @@ export const Editors_choice = [
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Architectural Wonders in Lifestyle",
         key: "Architecture",
-        path: "life_style/Architecture"
+        path: "/categories/life_style"
     },
     {
         img: Skate,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Entertainment Trends for 2023",
         key: "Entertainment",
-        path: "life_style/Entertainment"
+        path: "/categories/life_style"
     }
 ];
 
@@ -68,7 +68,7 @@ export const editors_first = [
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Handiwork and Fashion Styles",
         key: "Fashion",
-        path: "Life_style_Handiwork"
+        path: "/categories/Life_style"
     }
 ];
 
@@ -78,41 +78,41 @@ export const AllChoices = [
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Latest in the Movie Industry",
         key: "Business",
-        path: "life_style/Movies"
+        path: "/categories/life_style/"
     },
     {
         img: Designer,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Trends in Modern Design",
         key: "Food",
-        path: "life_style/Design"
+        path: "/categories/life_style/"
     },
     {
         img: Food2,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "The Future of Food and Sustainability",
         key: "Tech",
-        path: "life_style/Food"
+        path: "/categories/food"
     },
     {
         img: Business,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Top Business Insights for 2023",
         key: "Movies",
-        path: "life_style/Business"
+        path: "/categories/economy"
     },
     {
         img: Tech,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "Technological Innovations of 2023",
         key: "Sports",
-        path: "life_style/Tech"
+        path: "/categories/technology"
     },
     {
         img: Boxing,
         Read: `6min Read__ ${new Date().toLocaleDateString()}`,
         Title: "The Rise of Boxing in Modern Sports",
         key: "Fashion",
-        path: "life_style/Sports"
+        path: "/categories/life_style"
     }
 ];
