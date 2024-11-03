@@ -1,42 +1,43 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-const NewsContext = createContext();
+const NewsContext = createContext({}); // Initialize as an empty object
 
 const NewsProvider = ({ children }) => {
-  const [recentNews, setRecentNews] = useState([]);
+  const [newsByCategory, setNewsByCategory] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchRecentNews = async () => {
-      const url = `https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=d182a76173324ba5bc28fde3d7ca16cb`;
+    const fetchNewsByCategory = async (category) => {
+      const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=d182a76173324ba5bc28fde3d7ca16cb`;
 
       try {
         const response = await fetch(url);
         const data = await response.json();
-        // Optionally, determine categories here or keep it simple
-        setRecentNews(data.articles);
+        return data.articles || [];
       } catch (error) {
-        console.error('Error fetching the recent news:', error);
-      } finally {
-        setLoading(false);
+        console.error(`Error fetching ${category} news:`, error);
+        return [];
       }
     };
 
-    fetchRecentNews();
+    const fetchAllNews = async () => {
+      setLoading(true);
+      const categories = ['general', 'technology', 'food', 'fashion', 'lifestyle', 'wars', 'economy'];
+      const newsData = {};
+
+      for (const category of categories) {
+        newsData[category] = await fetchNewsByCategory(category);
+      }
+
+      setNewsByCategory(newsData);
+      setLoading(false);
+    };
+
+    fetchAllNews();
   }, []);
 
-  const categories = [
-    { name: 'Articles', path: '/articles' },
-    { name: 'Technology', path: '/categories/technology' },
-    { name: 'Food', path: '/categories/food' },
-    { name: 'Fashion', path: '/categories/fashion' },
-    { name: 'Lifestyle', path: '/categories/lifestyle' },
-    { name: 'Wars', path: '/categories/wars' },
-    { name: 'Economy', path: '/categories/economy' },
-  ];
-
   return (
-    <NewsContext.Provider value={{ recentNews, loading, categories }}>
+    <NewsContext.Provider value={{ newsByCategory, loading }}>
       {children}
     </NewsContext.Provider>
   );

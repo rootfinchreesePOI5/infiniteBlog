@@ -1,17 +1,28 @@
-import React, { useContext } from 'react';
-import { NewsContext } from '../Context/NewsContext';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const Food = () => {
+  const [foodNews, setFoodNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const { recentNews, loading } = useContext(NewsContext);
+  useEffect(() => {
+    const fetchFoodNews = async () => {
+      const url = `https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=d182a76173324ba5bc28fde3d7ca16cb`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setFoodNews(data.articles || []);
+      } catch (error) {
+        console.error('Error fetching food news:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoodNews();
+  }, []);
 
   if (loading) return <p>Loading Food news...</p>;
 
-  // Filter the news articles based on the category (for example, technology)
-  const foodNews = recentNews.filter(article => 
-    article.category === 'food'
-  );
   return (
     <div className="new-articles">
       <h1 className='NEWS_TYPE'>Food News</h1>
@@ -26,9 +37,7 @@ const Food = () => {
                   backgroundImage: `url(${item.urlToImage || ''})`,
                 }}
               >
-                <Link to={`/${item.category}`} target="_self">
-                  <h1>{item.title}</h1>
-                </Link>
+                <h1>{item.title}</h1>
               </div>
               <h5>{item.source.name}</h5>
               <p>{item.description}</p>
@@ -39,7 +48,7 @@ const Food = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Food
+export default Food;

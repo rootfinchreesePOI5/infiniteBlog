@@ -1,20 +1,35 @@
-import React, { useContext } from 'react';
-import { NewsContext } from '../Context/NewsContext';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const Wars = () => {
+  const [warsNews, setWarsNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    
-  const { recentNews, loading } = useContext(NewsContext);
+  useEffect(() => {
+    const fetchWarsNews = async () => {
+      const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=d182a76173324ba5bc28fde3d7ca16cb`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        // Filter articles that mention 'war' in their title or description
+        const filteredWarsNews = data.articles.filter(article => 
+          article.title.toLowerCase().includes('war') || 
+          (article.description && article.description.toLowerCase().includes('war'))
+        );
+        setWarsNews(filteredWarsNews);
+      } catch (error) {
+        console.error('Error fetching war news:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWarsNews();
+  }, []);
 
   if (loading) return <p>Loading war news...</p>;
 
-  // Filter the news articles based on the category (for example, technology)
-  const warsNews = recentNews.filter(article => 
-    article.category === 'wars'
-  );
   return (
-<div className="new-articles">
+    <div className="new-articles">
       <h1 className='NEWS_TYPE'>Wars News</h1>
       <hr />
       <div className="article-container">
@@ -27,9 +42,7 @@ const Wars = () => {
                   backgroundImage: `url(${item.urlToImage || ''})`,
                 }}
               >
-                <Link to={`/${item.category}`} target="_self">
-                  <h1>{item.title}</h1>
-                </Link>
+                <h1>{item.title}</h1>
               </div>
               <h5>{item.source.name}</h5>
               <p>{item.description}</p>
@@ -40,7 +53,7 @@ const Wars = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Wars
+export default Wars;
