@@ -1,16 +1,28 @@
-import React, { useContext } from 'react';
-import { NewsContext } from '../Context/NewsContext';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Technology = () => {
-  const { recentNews, loading } = useContext(NewsContext);
+  const [technologyNews, settechNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  if (loading) return <p>Loading technology news...</p>;
+  useEffect(() => {
+    const fetchtechNews = async () => {
+      const url = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=d182a76173324ba5bc28fde3d7ca16cb`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        settechNews(data.articles || []);
+      } catch (error) {
+        console.error('Error fetching tech news:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Filter the news articles based on the category (for example, technology)
-  const technologyNews = recentNews.filter(article => 
-    article.category === 'technology'
-  );
+    fetchtechNews();
+  }, []);
+
+  if (loading) return <p>Loading tech news...</p>;
 
   return (
     <div className="new-articles">
