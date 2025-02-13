@@ -11,7 +11,7 @@ function Add() {
     show === false ? setShow(true) : setShow(false)
   }
   return type && (
-    <div className='absolute flex transition-all duration-700 top-[90%] right-7 md:right-10 shadow-2xl shadow-black rounded-full'>
+    <div className='fixed flex transition-all duration-700 top-[90%] right-7 md:right-10 shadow-2xl shadow-black rounded-full'>
       <div>
         {
           token ?

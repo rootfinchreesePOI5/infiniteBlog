@@ -15,12 +15,12 @@ function Article() {
     }, [params, latest]); // Add latest to ensure data updates
 
     return latest && (
-        <div className='flex flex-col gap-5 py-[5%] px-[2%]'>
+        <div className='flex flex-col gap-5 py-[26%] md:py-[16%] px-[5%]'>
             {article.map((item, index) => (
                 <div key={index} className='flex flex-col gap-5'>
                     <div className='flex flex-col md:flex-row items-center gap-6'>
                         {
-                            item.urlToImage ? <img className='w-[50%]' src={item.urlToImage} alt="" /> : ""
+                            item.urlToImage ? <img className='w-full md:w-[50%]' src={item.urlToImage} alt="" /> : ""
                         }
                         <div className='flex flex-col gap-3'>
                             <h1 className='text-2xl md:text-3xl font-bold'>{item.title}</h1>

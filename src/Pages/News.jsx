@@ -7,7 +7,7 @@ function News() {
   const navigate = useNavigate();
 
   return latest && (
-    <div className="flex flex-col gap-8 py-[5%] px-[5%]">
+    <div className="flex flex-col gap-8 py-[12%] md:py-[6%] px-[5%]">
       {/* Section Header */}
       <div className="flex items-center gap-3">
         <span className="w-4 h-4 bg-red-600 rounded-full"></span>

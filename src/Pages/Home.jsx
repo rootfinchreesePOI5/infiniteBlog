@@ -14,7 +14,7 @@ function Home() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center gap-8 py-16 px-6 md:px-12">
+    <div className="w-full flex flex-col items-center gap-8 py-[7rem] px-6 md:px-12">
       <Hero />
       <div className="flex flex-col gap-14 w-full">
         <Recents />

@@ -14,7 +14,7 @@ function Related({ source, title }) {
   return latest && (
     <div className='px-[5%] mt-12 flex flex-col gap-4'>
       <p className='underline text-2xl'>Related News</p>
-      <div className='grid grid-cols-2 gap-12'>
+      <div className='grid md:grid-cols-2 gap-12'>
         {related.map((item, index) => (
           <div
             key={index}

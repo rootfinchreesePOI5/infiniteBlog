@@ -96,8 +96,8 @@ function Login() {
         <form className="flex flex-col gap-3 w-full" onSubmit={state === 'Login' ? Login : Subscribe}>
           <div className="flex items-center justify-center">
             <label className={`${state === 'Login' ? 'hidden' : 'flex flex-col'} relative`} id="imagePick">
-              <img className="w-36 rounded-full opacity-30" src={image ? URL.createObjectURL(image) : upload} alt="" />
-              <img className="w-16 rounded-full absolute bottom-10 left-10" src={image ? '' : emptyProfile} alt="" />
+              <img className="w-20 rounded-full" src={image ? URL.createObjectURL(image) : upload} alt="" />
+              <img className="w-8 rounded-full absolute bottom-6 left-6" src={image ? '' : emptyProfile} alt="" />
               <input onChange={(e) => setImage(e.target.files[0])} type="file" className="hidden" id="imagPick" />
             </label>
           </div>
