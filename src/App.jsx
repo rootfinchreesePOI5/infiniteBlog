@@ -19,7 +19,7 @@ function App() {
   return (
     <div className={`${theme === 'light' ? "bg-primary text-text" : "bg-dark-primary text-dark-text"} transition-all duration-500`}>
       <Navbar />
-      <Toaster position="top-right" richColors />
+      <Toaster position="bottom-right" richColors />
       <div className='py-[7%] md:py-[5%] lg:py-3'>
         <Routes>
           <Route path='/' element={<Home />} />
