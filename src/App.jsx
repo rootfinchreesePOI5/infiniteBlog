@@ -10,7 +10,7 @@ import News from './Pages/News'
 import Login from './Pages/Login'
 import Notifications from './Pages/Notifications'
 import Profile from './Pages/Profile'
-import MyStories from './Pages/Mystories'
+import MyStories from './Pages/MyStories'
 import Article from './Components/Article'
 
 function App() {
