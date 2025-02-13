@@ -13,18 +13,27 @@ const NewsProvider = (props) => {
   const getHeadline = async () => {
     try {
       console.log(Latesturl);
-      const response = await axios.get(Latesturl);
+  
+      const response = await axios.get(Latesturl, {
+        headers: {
+          "User-Agent": navigator.userAgent, // Use browser's user-agent
+          "Accept": "application/json",
+        },
+      });
+  
       console.log(response);
-      if (response.status) {
-        const data = await response.data;
-        setLatest(data.articles);
+  
+      if (response.status === 200) {
+        setLatest(response.data.articles);
       } else {
-        setError("Error fetching Data");
+        setError("Error fetching data");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Fetch Error:", error);
+      setError("Failed to fetch news");
     }
   };
+  
 
   useEffect(() => {
     getHeadline();
