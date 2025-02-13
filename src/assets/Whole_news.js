@@ -1,15 +1,11 @@
-import Lifestyle from '../assets/images/Life_style.jpg';
-import Business from '../assets/images/Business.jpg';
-import Technology from '../assets/images/Technology_2.jpg';
-import Fashion from '../assets/images/Fashion.jpg';
-import Food from '../assets/images/Food.jpg';
-import Technology_2 from '../assets/images/Technology.jpg';
-import community from '../assets/images/Community.jpg'
-import education from '../assets/images/Education.jpg'
-import Sports from '../assets/images/Sports.jpg'
-import Photography from '../assets/images/Photography.jpg'
-import Army from '../assets/images/Army.jpg'
-import Theater from '../assets/images/Theater.jpg'
+import {
+    Lifestyle,
+    Business,
+    Technology,
+    Technology_2,
+    Fashion,
+    Food,
+    Technology} from './images'
 
 
 export const Recent_News = [

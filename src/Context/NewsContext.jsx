@@ -1,46 +1,59 @@
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from "react";
+import axios from 'axios';
 
-const NewsContext = createContext({}); // Initialize as an empty object
+export const NewsContext = createContext();
 
-const NewsProvider = ({ children }) => {
-  const [newsByCategory, setNewsByCategory] = useState({});
+const NewsProvider = (props) => {
+  const Latesturl = import.meta.env.VITE_API_URL;
+  const [latest, setLatest] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  const getHeadline = async () => {
+    try {
+      console.log(Latesturl);
+      const response = await axios.get(Latesturl);
+      console.log(response);
+      if (response.status) {
+        const data = await response.data;
+        setLatest(data.articles);
+      } else {
+        setError("Error fetching Data");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchNewsByCategory = async (category) => {
-      const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=d182a76173324ba5bc28fde3d7ca16cb`;
+    getHeadline();
+  }, [Latesturl]);
 
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data.articles || [];
-      } catch (error) {
-        console.error(`Error fetching ${category} news:`, error);
-        return [];
-      }
-    };
+  // Check when all images are loaded
+  useEffect(() => {
+    if (latest.length > 0) {
+      const imagePromises = latest.map(article => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = article.urlToImage;
+          img.onload = resolve;
+          img.onerror = resolve; // Resolve even if an image fails to load
+        });
+      });
 
-    const fetchAllNews = async () => {
-      setLoading(true);
-      const categories = ['general', 'technology', 'food', 'fashion', 'lifestyle', 'wars', 'economy'];
-      const newsData = {};
-
-      for (const category of categories) {
-        newsData[category] = await fetchNewsByCategory(category);
-      }
-
-      setNewsByCategory(newsData);
-      setLoading(false);
-    };
-
-    fetchAllNews();
-  }, []);
+      Promise.all(imagePromises).then(() => {
+        setImagesLoaded(true);
+        setLoading(false);
+      });
+    }
+  }, [latest]);
 
   return (
-    <NewsContext.Provider value={{ newsByCategory, loading }}>
-      {children}
+    <NewsContext.Provider value={{ Latesturl, latest, loading, error, imagesLoaded }}>
+      {props.children}
     </NewsContext.Provider>
   );
 };
 
-export { NewsContext, NewsProvider };
+export default NewsProvider;

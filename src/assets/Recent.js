@@ -1,19 +1,19 @@
-import Lifestyle from '../assets/images/Life_style.jpg';
-import Business from '../assets/images/Business.jpg';
-import Technology from '../assets/images/Technology_2.jpg';
-import Fashion from '../assets/images/Fashion.jpg';
-import Food from '../assets/images/Food.jpg';
-import Technology_2 from '../assets/images/Technology.jpg';
-import Tailor from '../assets/images/Tailor.jpg';
-import Architecture from '../assets/images/Rome.jpg';
-import Skate from '../assets/images/Skate.jpg';
-
-import Movies from '../assets/images/Movies.jpg';
-import Company from '../assets/images/comapany.jpg';
-import Tech from '../assets/images/Tech.jpg';
-import Boxing from '../assets/images/Boxing.jpg';
-import Food2 from '../assets/images/Food2.jpg';
-import Designer from '../assets/images/Designer.jpg';
+import {
+    Lifestyle,
+    Business,
+    Technology,
+    Tailor,
+    Technology_2,
+    Fashion,
+    Boxing,
+    Food,
+    Architecture,
+    Skate,
+    Movies,
+    Company,
+    Food2,
+    Designer,
+    Technology } from './images'
 
 export const Recent = [
     {

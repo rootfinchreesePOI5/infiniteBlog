@@ -1,41 +1,43 @@
-import React from 'react'
-import { Routes , Route} from 'react-router-dom'
-import Home from './Pages/Home'
-import Articles from './Pages/Articles'
-import Categories from './Pages/Categories'
-import About from './Pages/About'
-import Contact from './Pages/Contact'
+import React, { useContext } from 'react'
+import { AppContext } from './Context/AppContext'
+import {Toaster} from 'sonner'
 import Navbar from './Components/Navbar'
-import Footer from './Components/Footer'
+import { Route, Routes } from 'react-router-dom'
+import Home from './Pages/Home'
+import Myblog from './Pages/Myblog'
+import Categories from './Pages/Categories'
+import News from './Pages/News'
 import Login from './Pages/Login'
-import Technology from './Pages/Technology'
-import Food from './Pages/Food'
-import Fashion from './Pages/Fashion'
-import Economy from './Pages/Economy'
-import Wars from './Pages/Wars'
-import Lifestyle from './Pages/Lifestyle'
+import Notifications from './Pages/Notifications'
+import Profile from './Pages/Profile'
+import MyStories from './Pages/Mystories'
+import Article from './Components/Article'
 
-const App = () => {
+function App() {
+
+  const { theme, setTheme } = useContext(AppContext)
   return (
-    <div>
-      <Navbar/>
-      <Routes>
-        <Route path='/' element={<Home/>}></Route> ;
-        <Route path='/articles' element={<Articles/>}></Route> ;
-        <Route path='/categories' element={<Categories/>}></Route> ;
-        <Route path='/about' element={<About/>}></Route> ;
-        <Route path='/contact' element={<Contact/>}></Route> ;
-        <Route path='/login' element={<Login/>}></Route>
-        <Route path='/categories/technology' element={<Technology/>}></Route>
-        <Route path='/categories/food' element={<Food/>}></Route>
-        <Route path='/categories/fashion' element={<Fashion/>}></Route>
-        <Route path='/categories/economy' element={<Economy/>}></Route>
-        <Route path='/categories/wars' element={<Wars/>}></Route>
-        <Route path='/categories/lifestyle' element={<Lifestyle/>}></Route>
-      </Routes>
-      <Footer/>
+    <div className={`${theme === 'light' ? "bg-primary text-text" : "bg-dark-primary text-dark-text"} transition-all duration-500`}>
+      <Navbar />
+      <Toaster position="top-right" richColors />
+      <div className='py-[7%] md:py-[5%] lg:py-3'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='Blog' element={<Myblog />} />
+          {/* <Route path='My blog/:id' element={<Myblog />} /> */}
+          <Route path='/Stories' element={<MyStories />} />
+          {/* <Route path='/My stories/:id' element={<MyStories />} /> */}
+          <Route path='/Categories' element={<Categories />} />
+          <Route path='/News' element={<News />} />
+          <Route path='/News/:id' element={<Article/>} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/Notifications' element={<Notifications />} />
+          <Route path='/Profile' element={<Profile />} />
+        </Routes>
+      </div>
+        
     </div>
   )
 }
 
-export default App;
+export default App
