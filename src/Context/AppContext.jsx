@@ -7,7 +7,7 @@ export const AppContext = createContext();
 
 const AppProvider = (props) => {
   const [theme, setTheme] = useState('dark');
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [posts, setPosts] = useState(false);
   const [stories, setStories] = useState(false);
   const [type, setType] = useState('Blog');

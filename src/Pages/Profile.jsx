@@ -16,7 +16,7 @@ function Profile() {
     setToken(false);
     navigate('/Login');
     notify()
-    localStorage.removeItem('token')
+    sessionStorage.removeItem('token')
   }
 
   const Editinfo = () => {

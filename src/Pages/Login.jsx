@@ -35,7 +35,7 @@ function Login() {
     try {
       const { data } = await axios.post(`${backendUrl}/api/user/login`, { email, password });
       if (data.success) {
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         setToken(data.token);
         toast.promise(
           new Promise((resolve) => setTimeout(resolve, 2000)),
@@ -69,7 +69,7 @@ function Login() {
       });
   
       if (response.data && response.data.success) {
-        localStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("token", response.data.token);
         setToken(response.data.token);
         toast.success("Account created successfully! 🎉");
         navigate('/')
@@ -78,7 +78,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error(error.response?.data?.message || "Something went wrong. Please try again.1");
+      toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
     }
   };
   

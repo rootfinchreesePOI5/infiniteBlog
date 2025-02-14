@@ -20,7 +20,7 @@ function Article() {
                 <div key={index} className='flex flex-col gap-5'>
                     <div className='flex flex-col md:flex-row items-center gap-6'>
                         {
-                            item.image ? <img src={item.image} alt="" /> : ""
+                            item.image ? <img className='w-full md:w-[50%]' src={item.image} alt="" /> : ""
                         }
                         <div className='flex flex-col gap-3'>
                             <h1 className='text-2xl md:text-3xl font-bold'>{item.title}</h1>

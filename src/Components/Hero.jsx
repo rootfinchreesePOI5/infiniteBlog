@@ -18,7 +18,7 @@ function Hero() {
         {latest.slice(3, 4).map((item, index) => (
           <div key={index} onClick={() => { navigate(`/News/${item.title}`) }} className='cursor-pointer flex flex-col md:flex-row items-center gap-8 w-full p-4  transition-all duration-300'>
             {
-              item.image ? <img src={item.image} alt="" /> : ""
+              item.image ? <img className='w-full md:w-[50%]' src={item.image} alt="" /> : ""
             }
             <div className='flex flex-col gap-3'>
               <h1 className='text-xl md:text-2xl font-bold'>{item.title}</h1>
