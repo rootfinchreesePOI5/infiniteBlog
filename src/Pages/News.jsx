@@ -22,13 +22,13 @@ function News() {
           {latest.map((item, index) => (
             <div
               key={index}
-              className=" backdrop-blur-lg shadow-lg rounded-lg overflow-hidden hover:shadow-xl bg-primary text-text transition-all duration-300 cursor-pointer"
+              className="  overflow-hidden  transition-all duration-300 cursor-pointer"
               onClick={() => navigate(`/News/${item.title}`)}
             >
               {/* News Image */}
               <div className="w-full h-60 overflow-hidden">
                 {
-                  item.urlToImage ? <img src={item.urlToImage} alt="" /> : ""
+                  item.image ? <img src={item.image} alt="" /> : ""
                 }
               </div>
 

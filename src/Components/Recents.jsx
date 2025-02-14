@@ -12,9 +12,9 @@ function Recents() {
       <p className='text-2xl font-semibold underline'>Recent News</p>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
         {latest.slice(4, 8).map((item, index) => (
-          <div key={index} onClick={() => navigate(`/News/${item.title}`)} className='cursor-pointer flex flex-col gap-3 p-4  shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300'>
+          <div key={index} onClick={() => navigate(`/News/${item.title}`)} className='cursor-pointer flex flex-col gap-3 p-4   transition-all duration-300'>
             {
-              item.urlToImage ? <img src={item.urlToImage} alt="" /> : ""
+              item.image ? <img src={item.image} alt="" /> : ""
             }
             <div className='flex flex-col gap-2'>
               <h1 className='font-semibold text-lg'>{item.title}</h1>
