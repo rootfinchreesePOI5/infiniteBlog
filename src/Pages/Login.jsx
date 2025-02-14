@@ -85,9 +85,9 @@ function Login() {
   
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <div className="flex flex-col gap-6 rounded-md shadow-zinc-800 shadow-lg w-[80%] md:w-[30%] md:p-12 p-6 items-center bg-primary text-text">
+      <div className="flex flex-col gap-6 rounded-md shadow-zinc-800 shadow-lg w-[80%] md:w-[30%] md:p-12 p-6 items-center bg-black text-wgite">
         <div className="flex gap-2 items-center">
-          <p className="text-2xl text-dark-main">{state}</p>
+          <p className="text-xl text-dark-main">{state}</p>
           <p className="text-xl md:text-2xl flex items-center gap-2 ">
             <img className="bg-dark-main w-[35px] h-[35px] p-1 rounded-full" src={logo} alt="" />
             to infiniteBlog

@@ -10,7 +10,7 @@ function Recents() {
     <div className='flex flex-col gap-6 w-full'>
       {error && <p className='text-red-500'>{error}</p>}
       <p className='text-2xl font-semibold underline'>Recent News</p>
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
         {latest.slice(4, 8).map((item, index) => (
           <div key={index} onClick={() => navigate(`/News/${item.title}`)} className='cursor-pointer flex flex-col gap-3 p-4   transition-all duration-300'>
             {
