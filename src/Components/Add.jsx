@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { lock, plusW } from '../assets/images'
 import { AppContext } from '../Context/AppContext'
 import { useNavigate} from 'react-router-dom';
 
-function Add() {
+function Add({array}) {
   const {token , type } = useContext(AppContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -11,7 +11,7 @@ function Add() {
     show === false ? setShow(true) : setShow(false)
   }
   return type && (
-    <div className='fixed flex transition-all duration-700 top-[90%] right-7 md:right-10 shadow-2xl shadow-black rounded-full'>
+    <div style={array ? {display:'none'} : {}} className={`fixed flex transition-all duration-700 top-[90%] right-7 md:right-10 shadow-2xl shadow-black rounded-full`}>
       <div>
         {
           token ?

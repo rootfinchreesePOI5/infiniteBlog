@@ -88,7 +88,7 @@ function Profile() {
               {isEdit ? (
                 <div className='flex flex-col sm:flex-row gap-2 sm:gap-3'>
                   <p className='text-dark-main'>Username:</p>
-                  <input className='px-[10px] sm:px-[20px] text-black w-full sm:w-auto' onChange={(e) => setuserData(prev => ({ ...prev, name: e.target.value }))} type="text"  placeholder='@username_sample' required />
+                  <input className='px-[10px] sm:px-[20px] text-black w-full sm:w-auto' onChange={(e) => setuserData(prev => ({ ...prev, username: e.target.value }))} type="text"  placeholder='@username_sample' required />
                 </div>
               ) : (
                 <div className='flex gap-3'>

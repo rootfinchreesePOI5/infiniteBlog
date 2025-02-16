@@ -64,6 +64,15 @@ const AppProvider = (props) => {
     );
   }
 
+  //const get user post and stories
+  const UserPosts = async (params) => {
+    
+  }
+
+  const UserStories = async (params) => {
+    
+  }
+
 const value = {
   theme,
   setTheme,

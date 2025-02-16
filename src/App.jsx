@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { AppContext } from './Context/AppContext'
-import {Toaster} from 'sonner'
+import { Toaster } from 'sonner'
 import Navbar from './Components/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
@@ -12,6 +12,8 @@ import Notifications from './Pages/Notifications'
 import Profile from './Pages/Profile'
 import MyStories from './Pages/MyStories'
 import Article from './Components/Article'
+import StoryForm from './Pages/StoryForm'
+import FormBlog from './Pages/FormBlog'
 
 function App() {
 
@@ -26,16 +28,17 @@ function App() {
           <Route path='Blog' element={<Myblog />} />
           {/* <Route path='My blog/:id' element={<Myblog />} /> */}
           <Route path='/Stories' element={<MyStories />} />
-          {/* <Route path='/My stories/:id' element={<MyStories />} /> */}
+          <Route path='/add/Blog' element={<FormBlog />} />
+          <Route path='/add/Story' element={<StoryForm />} />
           <Route path='/Categories' element={<Categories />} />
           <Route path='/News' element={<News />} />
-          <Route path='/News/:id' element={<Article/>} />
+          <Route path='/News/:id' element={<Article />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Notifications' element={<Notifications />} />
           <Route path='/Profile' element={<Profile />} />
         </Routes>
       </div>
-        
+
     </div>
   )
 }
