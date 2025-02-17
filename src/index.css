@@ -50,6 +50,10 @@ button:active {
   font-family: 'Gideon Roman';
 }
 
+.placeholder::placeholder{
+  color: #414141;
+}
+
 /* Mobile Menu Animation */
 @media (max-width: 768px) {
   .mobile-menu {

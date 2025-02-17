@@ -45,6 +45,10 @@ import wbell from './Icons/wbell.svg'
 import bbell from './Icons/bbell.svg'
 import plusW from "./Icons/plusW.svg"
 import plusB from "./Icons/plusB.svg"
+import imageIcon from "./Icons/imageIcon.svg"
+import at from "./Icons/at.svg"
+import save from "./Icons/save.svg"
+import savedIcon from "./Icons/saved.svg"
 
 export{
     //svgs
@@ -70,6 +74,10 @@ export{
     wbell,
     plusB,
     plusW,
+    imageIcon,
+    at,
+    save,
+    savedIcon,
 
     //images
     f_1,

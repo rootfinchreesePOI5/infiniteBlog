@@ -24,7 +24,7 @@ function Hero() {
               <h1 className='text-xl md:text-2xl font-bold'>{item.title}</h1>
               <h5 className='text-md italic text-gray-700'>{item.description}</h5>
               <p className='text-sm text-gray-600'>{item.content?.slice(0, 150)}...</p>
-              <h3 className='text-sm'>Reported by: <span className='font-medium underline'>{item.source.name}</span></h3>
+              <h3 className='text-sma'>Reported by: <span className='font-medium underline'>{item.source.name}</span></h3>
             </div>
           </div>
         ))}
