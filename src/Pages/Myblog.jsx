@@ -3,24 +3,13 @@ import { AppContext } from "../Context/AppContext";
 import Add from "../Components/Add";
 import { useNavigate } from "react-router-dom";
 import { Boxing, plusB } from "../assets/images";
+import axios from "axios";
 
 function Myblog() {
-  const { posts, setPosts, token, userData } = useContext(AppContext);
+  const { posts, setPosts, token, userData , backendUrl } = useContext(AppContext);
   const today = new Date().getDate();
   
-  const [Blogs, setBlogs] = useState([
-    {
-      img: Boxing,
-      Title: "Napheesa Collier wins $200K by taking Unrivaled 1-on-1 crown",
-      Description:
-        "Napheesa Collier of the WNBA’s Minnesota Lynx took home $200,000 on Friday...",
-      Content:
-        "MEDLEY, Fla. — Napheesa Collier of the WNBA’s Minnesota Lynx took home $200,000...",
-      Source: userData?.username || "Unknown",
-      publishedDate: today,
-      url: "https://nypost.com/2025/02/15/sports/napheesa-collier-wins-200k-by-taking-unrivaled-1-on-1-crown/",
-    },
-  ]);
+  const [Blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     if (!posts && Blogs.length > 0 && token) {
@@ -28,31 +17,54 @@ function Myblog() {
     }
   }, [posts, Blogs, token, setPosts]);
 
+  useEffect(() => {
+    // Fetch the posts on component mount
+    const fetchPosts = async () => {
+        try {
+            const response = await axios.get(`${backendUrl}/api/user/my-posts`, {
+                headers: {
+                    token, // Send the token to authenticate the user
+                },
+            });
+            if (response.data.success) {
+              console.log(response)
+                setBlogs(response.data.posts);
+            } else {
+                toast.error("Failed to fetch posts");
+            }
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+            toast.error("Error fetching posts");
+        }
+    };
+    fetchPosts();
+}, [token, backendUrl]);
+
   const navigate = useNavigate();
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center py-0 px-8">
+    <div className="w-full min-h-[110vh] flex items-center justify-center pt-[20%] pb-[5%]  md:py-[10%] px-8 md:px-[8%]">
       {posts ? (
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {Blogs.map((item, index) => (
               <div
                 key={index}
-                className="overflow-hidden hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col gap-3 min-h-[50vh]"
+                className="overflow-hidden hover:scale-105 transition-all duration-500 cursor-pointer flex flex-col gap-3 md:min-h-[50vh]"
               >
                 <img
                   className="w-full rounded-lg"
-                  src={item.img}
-                  alt={item.Title}
+                  src={item.image}
+                  alt={item.title}
                   loading="lazy"
                 />
                 <div>
                   <h1 className="text-xl font-semibold line-clamp-2">
-                    {item.Title}
+                    {item.title}
                   </h1>
                   <div className="flex justify-between items-center mt-2">
                     <h5 className="text-sm text-dark-main font-medium">
-                      {item.Source}
+                      {item.source}
                     </h5>
                     <span className="text-xs">Read More →</span>
                   </div>
@@ -61,7 +73,7 @@ function Myblog() {
             ))}
             <div
               onClick={() => navigate("/add/Blog")}
-              className="min-h-[20vh] md:min-h-[50vh] rounded-2xl bg-zinc-800 border flex items-center justify-center cursor-pointer"
+              className="min-h-[20vh] md:min-h-[30vh] rounded-2xl bg-zinc-800 border flex items-center justify-center cursor-pointer"
             >
               <img src={plusB} alt="Add Blog" />
             </div>

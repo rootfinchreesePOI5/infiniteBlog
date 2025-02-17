@@ -3,29 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 import { at, imageIcon, save, savedIcon } from "../assets/images";
 import axios from "axios";
+import { toast } from "sonner";
 
 function FormBlog() {
     const [image, setImage] = useState(null);
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [content, setContent] = useState('')
-    const [url, setUrl] = useState('')
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [content, setContent] = useState('');
+    const [url, setUrl] = useState('');
     const date = new Date();
-
-
 
     const [saved, setSaved] = useState(false);
     const [addLink, setAddLink] = useState(false);
     const navigate = useNavigate();
-    const { userData, backendUrl, token } = useContext(AppContext)
+    const { userData, backendUrl, token } = useContext(AppContext);
 
     const toggleSaved = useCallback(() => setSaved((prev) => !prev), []);
     const toggleLink = useCallback(() => setAddLink((prev) => !prev), []);
 
-
-
-    //send to db
-    const addBlog = async () => {
+    // Send to DB
+    const addBlog = async (e) => {
+        e.preventDefault();
         try {
             const formData = new FormData();
             formData.append("image", image);
@@ -36,18 +34,28 @@ function FormBlog() {
             formData.append("publishedAt", date);
             formData.append("url", url);
 
-            const { data } = await axios.post(`${backendUrl}/api/user/add-post`, formData, { headers: { token } });
+            const response = await axios.post(`${backendUrl}/api/user/add-post`, formData, {
+                headers: { 
+                    token,
+                    "Content-Type": "multipart/form-data" // Ensure proper content type
+                }
+            });
 
-
-
+            if (response.data.success) {
+                toast.success(response.data.message);
+                navigate("/Blog");
+            } else {
+                toast.error(response.data.error || "Something went wrong");
+            }
         } catch (error) {
-
+            console.error("Error:", error.response?.data || error.message);
+            toast.error("Failed to add post");
         }
-    }
+    };
 
     return (
         <div className="flex h-fit items-center justify-center pt-20 md:pt-16">
-            <form className="w-full max-w-3xl bg-opacity-10 backdrop-blur-xl p-6 md:p-12">
+            <form onSubmit={addBlog} encType="multipart/form-data" className="w-full max-w-3xl bg-opacity-10 backdrop-blur-xl p-6 md:p-12">
                 {/* Image Upload */}
                 <label className="w-full h-60 flex flex-col items-center justify-center border border-gray-700 rounded-xl cursor-pointer hover:border-blue-500 transition">
                     {image ? (
@@ -69,7 +77,11 @@ function FormBlog() {
                     <input
                         type="file"
                         className="hidden"
-                        onChange={(e) => setImage(e.target.files[0])}
+                        onChange={(e) => {
+                            if (e.target.files.length > 0) {
+                                setImage(e.target.files[0]);
+                            }
+                        }}
                     />
                 </label>
 
@@ -78,6 +90,8 @@ function FormBlog() {
                     <input
                         type="text"
                         placeholder="Post Title*"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         className="w-full text-2xl bg-transparent border-b border-gray-600 outline-none py-2"
                     />
                 </div>
@@ -87,6 +101,8 @@ function FormBlog() {
                     <input
                         type="text"
                         placeholder="Description*"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                         className="w-full text-lg bg-transparent border-b border-gray-600 outline-none py-2"
                     />
                 </div>
@@ -95,6 +111,8 @@ function FormBlog() {
                 <textarea
                     className="w-full h-40 bg-transparent border border-gray-600 rounded-xl p-4 mt-4 outline-none transition"
                     placeholder="Share Your Thoughts*"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                 ></textarea>
 
                 {/* Buttons & Icons */}
@@ -113,7 +131,7 @@ function FormBlog() {
                                 src={at}
                                 alt="Add Link"
                             />
-                            <p className="underline">{url}</p>
+                            <p className="underline hidden md:flex md:max-w-[50vh] overflow-x-scroll">{url}</p>
                         </div>
                     </div>
 
@@ -135,10 +153,11 @@ function FormBlog() {
                     <div className="flex items-center bg-gray-800 rounded-xl p-3 mt-4">
                         <input
                             type="text"
-                            placeholder="Add Link" onChange={(e) => setUrl(e.target.value)}
+                            placeholder="Add Link" 
+                            onChange={(e) => setUrl(e.target.value)}
                             className="w-full bg-transparent outline-none text-gray-300"
                         />
-                        <button onClick={() => setAddLink(false)} className="ml-2 px-8 py-2 bg-gray-700 rounded-lg hover:bg-gray-600transition">
+                        <button onClick={() => setAddLink(false)} className="ml-2 px-8 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition">
                             Save
                         </button>
                     </div>
